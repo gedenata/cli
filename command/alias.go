@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"strings"
+	"sort"
 
 	"github.com/cli/cli/utils"
 	"github.com/google/shlex"
@@ -148,9 +149,16 @@ func aliasList(cmd *cobra.Command, args []string) error {
 
 	tp := utils.NewTablePrinter(stdout)
 
-	for alias, expansion := range aliasCfg.All() {
+	aliasMap := aliasCfg.All()
+	keys := []string{}
+	for alias, _ := range aliasMap {
+		keys = append(keys, alias)
+	}
+	sort.Sort(sort.StringSlice(keys))
+
+	for _, alias := range keys {
 		tp.AddField(alias+":", nil, nil)
-		tp.AddField(expansion, nil, nil)
+		tp.AddField(aliasMap[alias], nil, nil)
 		tp.EndRow()
 	}
 
