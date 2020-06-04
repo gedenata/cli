@@ -2,8 +2,8 @@ package command
 
 import (
 	"fmt"
-	"strings"
 	"sort"
+	"strings"
 
 	"github.com/cli/cli/utils"
 	"github.com/google/shlex"
