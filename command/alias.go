@@ -151,10 +151,10 @@ func aliasList(cmd *cobra.Command, args []string) error {
 
 	aliasMap := aliasCfg.All()
 	keys := []string{}
-	for alias, _ := range aliasMap {
+	for alias := range aliasMap {
 		keys = append(keys, alias)
 	}
-	sort.Sort(sort.StringSlice(keys))
+	sort.Strings(keys)
 
 	for _, alias := range keys {
 		tp.AddField(alias+":", nil, nil)
